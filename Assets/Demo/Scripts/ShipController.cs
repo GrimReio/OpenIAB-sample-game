@@ -120,6 +120,7 @@ public class ShipController : MonoBehaviour
         if (_repairKitCount > 0 && _hp < 100)
         {
             --_repairKitCount;
+            _hp += 25;
             UpdateHpLabel();
             UpdateRepairCountLabel();
         }
