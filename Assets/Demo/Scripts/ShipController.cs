@@ -31,7 +31,25 @@ public class ShipController : MonoBehaviour
     [SerializeField]
     GameObject _ship = null;
 
+    [SerializeField]
+    TextMesh _hpLabel = null;
+
+    [SerializeField]
+    TextMesh _repairCountLabel = null;
+
     float _lastTime = -100;
+
+    int _hp = 100;
+    int _repairKitCount = 1;
+
+    public bool IsGodMode { get; set; }
+    public bool IsPremiumSkin { get; set; }
+
+    void Start()
+    {
+        UpdateHpLabel();
+        UpdateRepairCountLabel();
+    }
 
     void Update()
     {
@@ -73,13 +91,52 @@ public class ShipController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(Tag.Enemy))
+        if (other.gameObject.CompareTag(Tag.Enemy) && !IsGodMode)
         {
-            _ship.SetActive(false);
-            enabled = false;
+            _hp -= 25;
+            if (_hp < 0) _hp = 0;
+            UpdateHpLabel();
 
-            if (Destroyed != null)
-                Destroyed();
+            // DEAD
+            if (_hp == 0)
+            {
+                _ship.SetActive(false);
+                enabled = false;
+
+                if (Destroyed != null)
+                    Destroyed();
+            }            
         }
+    }
+
+    public void AddRepairKit()
+    {
+        ++_repairKitCount;
+        UpdateRepairCountLabel();
+    }
+
+    public void UseRepairKit()
+    {
+        if (_repairKitCount > 0 && _hp < 100)
+        {
+            --_repairKitCount;
+            UpdateHpLabel();
+            UpdateRepairCountLabel();
+        }
+    }
+
+    public int RepairKitCount()
+    {
+        return _repairKitCount;
+    }
+
+    void UpdateHpLabel()
+    {
+        _hpLabel.text = string.Format("HP: {0}", _hp);
+    }
+
+    void UpdateRepairCountLabel()
+    {
+        _repairCountLabel.text = string.Format("Repair Kits: {0}", _repairKitCount);
     }
 }
