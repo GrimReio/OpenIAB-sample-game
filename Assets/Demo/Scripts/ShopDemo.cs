@@ -56,10 +56,10 @@ public class ShopDemo : MonoBehaviour
 
         OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_Android.STORE_GOOGLE, "sku_repair_kit");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_Android.STORE_GOOGLE, "sku_premium_skin");
-        OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_GOOGLE, "sku_infinite_ammo");
+        OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_GOOGLE, "sku_god_mode");
 
         var options = new OnePF.Options();
-        options.storeKeys.Add(OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtKiFBiESx95DM1B6acfQVSns4fHR8wwvwzvHTwYac2TWEBdTkvn2tmZwu61NYrp2Puq1qHfgRM2M1pZcfmtUcDwTInP7uD5Gebom8MrOQfC6L8gMj9uksq1MyYq3vhkcHibKhpF47iaLvWsSnzYuwZ0iWGYh71OA2G7S28D1ikQdG+pzJdw9eFi6W+Gmfo0INII30npkNHwxnDv9wZ+eGqvp5M/JqZF3O3p8kjvsUb2IQj7eZlvSAhM/Z2p5XdSi1Os1r2Xu4um0Wv2HcgcbfCJqBwruuZVE+51zyPUMRYkm2/Nv9MyIEHmejvo0wHRmW1iuUzbwgEnkJYxPRqVUKwIDAQAB");
+        options.storeKeys.Add(OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+6Tu90pvu2/pdPCI+xcAEoxExJBDYsstQHGl28FPeuGjVv/vzguk19WqLcAOHptt5ahYB4LD8PugkMXmgCoYTw0WhWz70kplkkiwVsy9mRPJPsk2F1z/y1w176kV6IwdmGKgliRzPLHp2AUo1g+8XrFVF8V9K6n0uVQqfQ5sCEYdRPO+58b5qNG5kJ7wMYCB8ByY/BCddZDM9mbBziYQIxj/u1Wn45ptHzZv/hlxjHXaqB+UJB1uJZS4fw1w80XPwH7gHWbsVJS6d9fpv2S/nwOIcHmQtQ2W7SXJRhFbdHrjtpc/LHGfrB4KEthHl2wolFXepeJUjrkM2t5PN7NIwIDAQAB");
         OpenIAB.init(options);
     }
 

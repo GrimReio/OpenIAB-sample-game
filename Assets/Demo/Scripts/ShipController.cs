@@ -40,7 +40,7 @@ public class ShipController : MonoBehaviour
     float _lastTime = -100;
 
     int _hp = 100;
-    int _repairKitCount = 1;
+    int _repairKitCount = 2;
 
     public bool IsGodMode { get; set; }
     public bool IsPremiumSkin { get; set; }
