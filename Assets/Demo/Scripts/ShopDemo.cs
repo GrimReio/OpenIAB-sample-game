@@ -100,9 +100,9 @@ public class ShopDemo : MonoBehaviour
         OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_GOOGLE, "sku_god_mode");
 
         // Map SKUs for Amazon
-        OpenIAB.mapSku(SKU_REPAIR_KIT, SLIDE_ME, "amazon.sku_repair_kit");
-        OpenIAB.mapSku(SKU_PREMIUM_SKIN, SLIDE_ME, "amazon.sku_premium_skin");
-        OpenIAB.mapSku(SKU_GOD_MODE, SLIDE_ME, "amazon.sku_god_mode");
+        OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_Android.STORE_AMAZON, "amazon.sku_repair_kit");
+        OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_Android.STORE_AMAZON, "amazon.sku_premium_skin");
+        OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_AMAZON, "amazon.sku_god_mode");
 
         // Map SKUs for SlideME
         OpenIAB.mapSku(SKU_REPAIR_KIT, SLIDE_ME, "sm.sku_repair_kit");
