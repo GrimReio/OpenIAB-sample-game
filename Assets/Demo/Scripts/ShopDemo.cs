@@ -48,6 +48,8 @@ public class ShopDemo : MonoBehaviour
 
     #endregion
 
+    const string SLIDE_ME = "SlideME";
+
     /// <summary>
     /// Shop is active right now
     /// </summary>
@@ -92,13 +94,30 @@ public class ShopDemo : MonoBehaviour
         OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_iOS.STORE, "noncons_2");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_iOS.STORE, "noncons_1");
 
+        // Map SKUs for Google Play
         OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_Android.STORE_GOOGLE, "sku_repair_kit");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_Android.STORE_GOOGLE, "sku_premium_skin");
         OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_GOOGLE, "sku_god_mode");
 
+        // Map SKUs for Amazon
+        OpenIAB.mapSku(SKU_REPAIR_KIT, SLIDE_ME, "amazon.sku_repair_kit");
+        OpenIAB.mapSku(SKU_PREMIUM_SKIN, SLIDE_ME, "amazon.sku_premium_skin");
+        OpenIAB.mapSku(SKU_GOD_MODE, SLIDE_ME, "amazon.sku_god_mode");
+
+        // Map SKUs for SlideME
+        OpenIAB.mapSku(SKU_REPAIR_KIT, SLIDE_ME, "sm.sku_repair_kit");
+        OpenIAB.mapSku(SKU_PREMIUM_SKIN, SLIDE_ME, "sm.sku_premium_skin");
+        OpenIAB.mapSku(SKU_GOD_MODE, SLIDE_ME, "sm.sku_god_mode");
+
         // Set some library options
         var options = new OnePF.Options();
+        
+        // Add Google Play public key
         options.storeKeys.Add(OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+6Tu90pvu2/pdPCI+xcAEoxExJBDYsstQHGl28FPeuGjVv/vzguk19WqLcAOHptt5ahYB4LD8PugkMXmgCoYTw0WhWz70kplkkiwVsy9mRPJPsk2F1z/y1w176kV6IwdmGKgliRzPLHp2AUo1g+8XrFVF8V9K6n0uVQqfQ5sCEYdRPO+58b5qNG5kJ7wMYCB8ByY/BCddZDM9mbBziYQIxj/u1Wn45ptHzZv/hlxjHXaqB+UJB1uJZS4fw1w80XPwH7gHWbsVJS6d9fpv2S/nwOIcHmQtQ2W7SXJRhFbdHrjtpc/LHGfrB4KEthHl2wolFXepeJUjrkM2t5PN7NIwIDAQAB");
+
+        // Add SlideME public key
+        options.storeKeys.Add(SLIDE_ME, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5p5XkwapZsXrpHvrML6Oac4OuDwGPBfC8j1GMiPka0v1MXGN6rcC37qIOOsEMN9v9csS3mLPGINMHmcDJTTrIuLDbSB0QmB7iC3EzfUBAitHghEgDOba0Jn06tfcMrXalNQ8lpZJh4W1QgwWKra0CUTEHWKGwOdTS6YLQanvsC6B/16iGGFGymkKjGi0ptouplgvwZHe+4gqo6SoR5tRK7fkcSS+qSzHYdvAcmhzAYGKaV1Ihjy3dd9n2Jz5XeoNag4MSbKQ0YmHyjmyvyKliKOMDps3V5X9DJzTSSVOSYDVbrFPtdKzr2mJD7T7mtoTnaXYUQLCWOCQs2Oi7djW+QIDAQAB");
+
         OpenIAB.init(options);
     }
 
