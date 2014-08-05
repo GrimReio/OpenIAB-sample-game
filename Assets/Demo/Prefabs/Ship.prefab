@@ -326,6 +326,7 @@ MonoBehaviour:
   _ship: {fileID: 100000}
   _hpLabel: {fileID: 0}
   _repairCountLabel: {fileID: 0}
+  _premiumSkin: {fileID: 2100000, guid: 81d8982608c328e4dba05759a6499364, type: 2}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

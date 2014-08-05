@@ -37,13 +37,25 @@ public class ShipController : MonoBehaviour
     [SerializeField]
     TextMesh _repairCountLabel = null;
 
+    [SerializeField]
+    Material _premiumSkin = null;
+
     float _lastTime = -100;
 
     int _hp = 100;
     int _repairKitCount = 2;
+    bool _isPremiumSkin = false;
 
     public bool IsGodMode { get; set; }
-    public bool IsPremiumSkin { get; set; }
+    public bool IsPremiumSkin 
+    { 
+        get { return _isPremiumSkin; } 
+        set 
+        { 
+            _isPremiumSkin = value;
+            _ship.GetComponent<MeshRenderer>().material = _premiumSkin;
+        } 
+    }
 
     void Start()
     {
