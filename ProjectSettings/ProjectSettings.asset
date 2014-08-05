@@ -97,7 +97,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: Z:/Projects/OpenIAB-sample-game/onepf.keystore
+  AndroidKeystoreName: onepf.keystore
   AndroidKeyaliasName: openiab
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
