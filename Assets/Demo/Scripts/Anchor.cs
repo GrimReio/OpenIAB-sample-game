@@ -17,27 +17,55 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Anchor side enumeration
+/// </summary>
 public enum AnchorSide
 {
+    /// <summary>
+    /// Align to the bottom left of the screen
+    /// </summary>
     BottomLeft,
+
+    /// <summary>
+    /// Align to the bottom right of the screen
+    /// </summary>
     BottomRight,
+
+    /// <summary>
+    /// Align to the top left of the screen
+    /// </summary>
     TopLeft,
+
+    /// <summary>
+    /// Align to the top right of the screen
+    /// </summary>
     TopRight
 }
 
+/// <summary>
+/// Aligns gameObject on the screen
+/// </summary>
 public class Anchor : MonoBehaviour
 {
     [SerializeField]
     AnchorSide _anchorSide = AnchorSide.BottomLeft;
 
+    /// <summary>
+    /// Offset in pixels
+    /// </summary>
     [SerializeField]
     Vector2 _offset = Vector2.zero;
 
+    /// <summary>
+    /// Camera used for calculations
+    /// </summary>
     [SerializeField]
     Camera _camera = null;
 
     void Awake()
     {
+        // Align once on the start 
         switch (_anchorSide)
         {
             case AnchorSide.BottomLeft:

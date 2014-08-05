@@ -17,15 +17,24 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Player ship projectile
+/// </summary>
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// Speed of the bullet
+    /// </summary>
     [SerializeField]
     float _speed = 100.0f;
 
     void Update()
     {
+        // Simple movement
         transform.Translate(0, 0, _speed * Time.deltaTime);
         var pos = Camera.main.WorldToViewportPoint(transform.position);
+
+        // Destroy if in outer space
         if (pos.y > 1.1f)
             Destroy(gameObject);
     }

@@ -17,34 +17,57 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Represents enemy
+/// </summary>
 public class Enemy : MonoBehaviour
 {
+    /// <summary>
+    /// Explosion particle emitter
+    /// </summary>
     [SerializeField]
     Transform _explosionPrefab = null;
 
+    /// <summary>
+    /// Big explosion particle emitter
+    /// </summary>
     [SerializeField]
     Transform _bigExplosionPrefab = null;
 
+    /// <summary>
+    /// Fired on death by any cause
+    /// </summary>
     public static event System.Action<Enemy> Killed;
 
     float _speed = 50.0f;
 
     void Awake()
     {
+        // Randomize speed a bit
         _speed += Random.Range(0, 20.0f);
+
+        // Rotate randomly to add some diversity
         transform.Rotate(0, 0, Random.Range(10, 300));
     }
 
     void Update()
     {
+        // Simple movement
         transform.Translate(0, 0, -_speed * Time.deltaTime);
         var pos = Camera.main.WorldToViewportPoint(transform.position);
+
+        // Destroy when out of player view
         if (pos.y < -0.2f)
             Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Standard Unity collision handler
+    /// </summary>
+    /// <param name="other">other collider</param>
     void OnTriggerEnter(Collider other)
     {
+        // Killed by projectile
         if (other.gameObject.CompareTag(Tag.Bullet))
         {
             Destroy(gameObject);
@@ -53,6 +76,7 @@ public class Enemy : MonoBehaviour
             if (Killed != null)
                 Killed(this);
         }
+        // Killed by collision with player ship
         else if (other.gameObject.CompareTag(Tag.Player))
         {
             Destroy(gameObject);

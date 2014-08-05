@@ -18,9 +18,19 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+/// <summary>
+/// Simple screen button
+/// </summary>
 public class GameButton : MonoBehaviour 
 {
+    /// <summary>
+    /// Fired when pushed down
+    /// </summary>
     public event Action<GameButton> Down;
+    
+    /// <summary>
+    /// Fired when released
+    /// </summary>
     public event Action<GameButton> Up;
 
     bool _isDown = false;

@@ -19,8 +19,13 @@ using System.Collections;
 using System.Collections.Generic;
 using OnePF;
 
+/// <summary>
+/// Sample of the in-game shop
+/// </summary>
 public class ShopDemo : MonoBehaviour
 {
+    #region UI constants
+
     private const int OFFSET = 5;
     private const int BUTTON_WIDTH = 200;
     private const int BUTTON_HEIGHT = 80;
@@ -33,12 +38,27 @@ public class ShopDemo : MonoBehaviour
 
     private const int FONT_SIZE = 24;
 
+    #endregion
+
+    #region Product IDs
+
     public const string SKU_REPAIR_KIT = "sku_repair_kit";
     public const string SKU_GOD_MODE = "sku_infinite_ammo";
     public const string SKU_PREMIUM_SKIN = "sku_premium_skin";
 
+    #endregion
+
+    /// <summary>
+    /// Shop is active right now
+    /// </summary>
     private bool _processingPayment = false;
+    /// <summary>
+    /// If shop window is on screen
+    /// </summary>
     private bool _showShopWindow = false;
+    /// <summary>
+    /// Text in the popup window
+    /// </summary>
     private string _popupText = "";
 
     [SerializeField]
@@ -48,8 +68,10 @@ public class ShopDemo : MonoBehaviour
     ShipController _ship = null;
 
     #region Billing
+
     private void Awake()
     {
+        // Subscribe to all billing events
         OpenIABEventManager.billingSupportedEvent += OnBillingSupported;
         OpenIABEventManager.billingNotSupportedEvent += OnBillingNotSupported;
         OpenIABEventManager.queryInventorySucceededEvent += OnQueryInventorySucceeded;
@@ -74,6 +96,7 @@ public class ShopDemo : MonoBehaviour
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_Android.STORE_GOOGLE, "sku_premium_skin");
         OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_GOOGLE, "sku_god_mode");
 
+        // Set some library options
         var options = new OnePF.Options();
         options.storeKeys.Add(OpenIAB_Android.STORE_GOOGLE, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+6Tu90pvu2/pdPCI+xcAEoxExJBDYsstQHGl28FPeuGjVv/vzguk19WqLcAOHptt5ahYB4LD8PugkMXmgCoYTw0WhWz70kplkkiwVsy9mRPJPsk2F1z/y1w176kV6IwdmGKgliRzPLHp2AUo1g+8XrFVF8V9K6n0uVQqfQ5sCEYdRPO+58b5qNG5kJ7wMYCB8ByY/BCddZDM9mbBziYQIxj/u1Wn45ptHzZv/hlxjHXaqB+UJB1uJZS4fw1w80XPwH7gHWbsVJS6d9fpv2S/nwOIcHmQtQ2W7SXJRhFbdHrjtpc/LHGfrB4KEthHl2wolFXepeJUjrkM2t5PN7NIwIDAQAB");
         OpenIAB.init(options);
@@ -81,6 +104,7 @@ public class ShopDemo : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Unsubscribe to avoid nasty leaks
         OpenIABEventManager.billingSupportedEvent -= OnBillingSupported;
         OpenIABEventManager.billingNotSupportedEvent -= OnBillingNotSupported;
         OpenIABEventManager.queryInventorySucceededEvent -= OnQueryInventorySucceeded;
@@ -166,10 +190,12 @@ public class ShopDemo : MonoBehaviour
         if (!VerifyDeveloperPayload(purchase.DeveloperPayload))
             return;
         
+        // Check what was purchased and update game
         switch (purchase.Sku)
         {
             case SKU_REPAIR_KIT:
                 _ship.AddRepairKit();
+                // Consume repair kit
                 OpenIAB.consumeProduct(purchase);
                 break;
             case SKU_GOD_MODE:
@@ -217,9 +243,11 @@ public class ShopDemo : MonoBehaviour
     {
         Debug.Log("Transaction restore failed: " + error);
     }
+
     #endregion // Billing
 
     #region GUI
+
     void DrawPopup(int windowID)
     {
         // Close button
@@ -232,6 +260,10 @@ public class ShopDemo : MonoBehaviour
         GUI.Label(new Rect(10, WINDOW_HEIGHT * 0.3f, WINDOW_WIDTH - 20, WINDOW_HEIGHT), _popupText);
     }
 
+    /// <summary>
+    /// Show shop window
+    /// </summary>
+    /// <param name="windowID">window id</param>
     void DrawShopWindow(int windowID)
     {
         // Close button
@@ -240,6 +272,7 @@ public class ShopDemo : MonoBehaviour
             ShowShopWindow(false);
         }
 
+        // Disable everything while processing anything
         if (_processingPayment)
         {
             GUI.Box(new Rect(10, 40, WINDOW_WIDTH - 20, SHOP_BUTTON_HEIGHT), "Processing payment...");
@@ -295,7 +328,9 @@ public class ShopDemo : MonoBehaviour
 
     void OnGUI()
     {
+        // Set UI font size
         GUI.skin.window.fontSize = GUI.skin.label.fontSize = GUI.skin.box.fontSize = GUI.skin.button.fontSize = FONT_SIZE;
+        
         if (!_showShopWindow)
         {
             if (string.IsNullOrEmpty(_popupText) && GUI.Button(new Rect(Screen.width - BUTTON_WIDTH - OFFSET, OFFSET, BUTTON_WIDTH, BUTTON_HEIGHT), "Shop", GUI.skin.button))
@@ -323,6 +358,10 @@ public class ShopDemo : MonoBehaviour
     }
     #endregion // GUI
 
+    /// <summary>
+    /// Simply pause game
+    /// </summary>
+    /// <param name="pause">game is paused</param>
     void PauseGame(bool pause)
     {
         if (pause)

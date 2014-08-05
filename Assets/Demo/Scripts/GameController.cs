@@ -17,8 +17,13 @@ using System.Collections;
 * limitations under the License.
 ******************************************************************************/
 
+/// <summary>
+/// Straightforward game logic controller
+/// </summary>
 public class GameController : MonoBehaviour
 {
+    #region Game references
+
     [SerializeField]
     ShipController _shipController = null;
 
@@ -37,48 +42,74 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject _enemySpawner = null;
 
+    #endregion
+
+    /// <summary>
+    /// Stores final player score
+    /// </summary>
     int _score = 0;
 
     void OnEnable()
     {
+        // Subscribe to events
         _shipController.Destroyed += ShipController_Destroyed;
         Enemy.Killed += Enemy_Killed;
     }
 
     void OnDisable()
     {
+        // Unsubscribe to avoid leaks
         _shipController.Destroyed -= ShipController_Destroyed;
         Enemy.Killed -= Enemy_Killed;
     }
 
-    void Enemy_Killed(Enemy obj)
+    /// <summary>
+    /// Enemy takedown handler
+    /// </summary>
+    /// <param name="enemy">enemy ship</param>
+    void Enemy_Killed(Enemy enemy)
     {
+        // Add some score
         _score += 10;
+        // Update score on screen
         _scoreLabel.text = string.Format("SCORE: {0}", _score);
     }
 
+    /// <summary>
+    /// Player takedown handler
+    /// </summary>
     void ShipController_Destroyed()
     {
+        // Start game over movie
         StartCoroutine(GameOverCoroutine());
     }
 
+    /// <summary>
+    /// Game over beautification coroutine
+    /// </summary>
+    /// <returns></returns>
     IEnumerator GameOverCoroutine()
     {
+        // Disable UI
         _gui.SetActive(false);
+        // Disable spawning of enemies
         _enemySpawner.SetActive(false);
         yield return new WaitForSeconds(0.3f);
         var camera = Camera.main.transform;
+        // Rotate camera a bit
         while (camera.localRotation.eulerAngles.x > 65)
         {
             camera.Rotate(-30 * Time.deltaTime, 0, 0);
             yield return null;
         }
+        // Show GAME OVER overlay
         _gameOverOverlay.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         _totalScore.text = string.Format("TOTAL SCORE: {0}", _score);
         _totalScore.gameObject.SetActive(true);
         while (true)
         {
+            // Restart game
             if (Input.GetMouseButtonDown(0))
                 Application.LoadLevel(Application.loadedLevel);
 

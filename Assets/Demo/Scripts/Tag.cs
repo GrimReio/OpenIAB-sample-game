@@ -17,6 +17,9 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Hold tags used in game
+/// </summary>
 public static class Tag 
 {
     public const string Player = "Player";

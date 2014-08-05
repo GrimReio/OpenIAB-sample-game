@@ -17,8 +17,15 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Destroys game object when time is up
+/// Simply attach to any object
+/// </summary>
 public class SelfDestruct : MonoBehaviour
 {
+    /// <summary>
+    /// Waiting time
+    /// </summary>
     [SerializeField]
     float _seconds = 1.0f;
 

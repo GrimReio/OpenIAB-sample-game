@@ -17,17 +17,29 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Spawns enemies
+/// </summary>
 public class EnemySpawner : MonoBehaviour
 {
+    /// <summary>
+    /// Prefab of the enemy ship
+    /// </summary>
     [SerializeField]
     Transform _enemyPrefab = null;
 
+    /// <summary>
+    /// Spawn till the end of time
+    /// </summary>
+    /// <returns>coroutine</returns>
     IEnumerator Start()
     {
         while (true)
         {
             var pos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), 1.1f, 100));
             Instantiate(_enemyPrefab, pos, Quaternion.identity);
+            
+            // Spawn every second
             yield return new WaitForSeconds(1.0f);
         }
     }
