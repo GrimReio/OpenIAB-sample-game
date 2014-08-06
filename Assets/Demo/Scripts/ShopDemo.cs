@@ -109,6 +109,11 @@ public class ShopDemo : MonoBehaviour
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, SLIDE_ME, "sm.sku_premium_skin");
         OpenIAB.mapSku(SKU_GOD_MODE, SLIDE_ME, "sm.sku_god_mode");
 
+        // Map SKUs for Yandex.Store
+        OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_Android.STORE_YANDEX, "yandex.sku_repair_kit");
+        OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_Android.STORE_YANDEX, "yandex.sku_premium_skin");
+        OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_Android.STORE_YANDEX, "yandex.sku_god_mode");
+
         // Map SKUs for Windows Phone 8
         OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_WP8.STORE, "wp8.sku_repair_kit");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_WP8.STORE, "wp8.sku_premium_skin");
@@ -122,6 +127,9 @@ public class ShopDemo : MonoBehaviour
 
         // Add SlideME public key
         options.storeKeys.Add(SLIDE_ME, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5p5XkwapZsXrpHvrML6Oac4OuDwGPBfC8j1GMiPka0v1MXGN6rcC37qIOOsEMN9v9csS3mLPGINMHmcDJTTrIuLDbSB0QmB7iC3EzfUBAitHghEgDOba0Jn06tfcMrXalNQ8lpZJh4W1QgwWKra0CUTEHWKGwOdTS6YLQanvsC6B/16iGGFGymkKjGi0ptouplgvwZHe+4gqo6SoR5tRK7fkcSS+qSzHYdvAcmhzAYGKaV1Ihjy3dd9n2Jz5XeoNag4MSbKQ0YmHyjmyvyKliKOMDps3V5X9DJzTSSVOSYDVbrFPtdKzr2mJD7T7mtoTnaXYUQLCWOCQs2Oi7djW+QIDAQAB");
+
+        // Add Yandex.Store public key
+        options.storeKeys.Add(OpenIAB_Android.STORE_YANDEX, "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArvbmWP5xYYSKpdnjvLIRWlFzkGT1xoZIekhWPkGonE+KRd5EWNejLPvOcayY98+NCkLHKSENQSzH+T8IUIEQOhNFzviIblfy3UYG0cFcIehKOV8IiIxvPRAWHJdzrohTjCCU1A/Lz1NtUn/yxyezrbC0l2ebAdrZSTONMNxMSKAB1+YVbzXI7u4ls9/FIVnEXOyMnCHADEOgoklFnXEdajJHN/1o+cRz61ow8Qxr+IwG4SSQD1vlv7qkxwEVqBXdhkJBPprZRLq1+VWu+E3f+nYY0I/mHqsn+pY6z/XYK21gpo4ZbCQzsEDc9ySMeW9mYXZgcIdCTuUic9S26tYfGQIDAQAB");
 
         OpenIAB.init(options);
     }
@@ -188,7 +196,7 @@ public class ShopDemo : MonoBehaviour
         // Do we have the infinite ammo subscription?
         Purchase godModePurchase = inventory.GetPurchase(SKU_GOD_MODE);
         bool godModeSubscription = (godModePurchase != null && VerifyDeveloperPayload(godModePurchase.DeveloperPayload));
-        Debug.Log("User " + (godModeSubscription ? "HAS" : "DOES NOT HAVE") + " god mode subscription.");
+        Debug.Log("User " + (godModeSubscription ? "HAS" : "DOES NOT HAVE") + " god mode subscription");
         _ship.IsGodMode = godModeSubscription;
 
         // Check premium skin purchase
