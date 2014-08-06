@@ -81,6 +81,9 @@ public class ShipController : MonoBehaviour
     [SerializeField]
     TextMesh _repairCountLabel = null;
 
+    [SerializeField]
+    Material _regularSkin = null;
+
     /// <summary>
     /// Material to set when premium skin is purchased
     /// </summary>
@@ -104,9 +107,11 @@ public class ShipController : MonoBehaviour
     { 
         get { return _isPremiumSkin; } 
         set 
-        { 
+        {
+            if (_isPremiumSkin == value) return;
+
             _isPremiumSkin = value;
-            _ship.GetComponent<MeshRenderer>().material = _premiumSkin;
+            _ship.GetComponent<MeshRenderer>().material = _isPremiumSkin ? _premiumSkin : _regularSkin;
         } 
     }
 

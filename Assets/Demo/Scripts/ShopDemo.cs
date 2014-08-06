@@ -194,7 +194,7 @@ public class ShopDemo : MonoBehaviour
         // Check premium skin purchase
         Purchase cowboyHatPurchase = inventory.GetPurchase(SKU_PREMIUM_SKIN);
         bool isPremiumSkin = (cowboyHatPurchase != null && VerifyDeveloperPayload(cowboyHatPurchase.DeveloperPayload));
-        Debug.Log("User " + (isPremiumSkin ? "HAS" : "HAS NO") + " cowboy hat");
+        Debug.Log("User " + (isPremiumSkin ? "HAS" : "HAS NO") + " premium skin");
         _ship.IsPremiumSkin = isPremiumSkin;
 
         // Check for delivery of expandable items. If we own some, we should consume everything immediately
