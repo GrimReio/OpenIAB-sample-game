@@ -89,7 +89,7 @@ public class ShopDemo : MonoBehaviour
 
     private void Start()
     {
-        // SKU's for iOS MUST be mapped. Mappings for other stores are optional
+        // Map SKUs for iOS
         OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_iOS.STORE, "30_real");
         OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_iOS.STORE, "noncons_2");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_iOS.STORE, "noncons_1");
@@ -108,6 +108,11 @@ public class ShopDemo : MonoBehaviour
         OpenIAB.mapSku(SKU_REPAIR_KIT, SLIDE_ME, "sm.sku_repair_kit");
         OpenIAB.mapSku(SKU_PREMIUM_SKIN, SLIDE_ME, "sm.sku_premium_skin");
         OpenIAB.mapSku(SKU_GOD_MODE, SLIDE_ME, "sm.sku_god_mode");
+
+        // Map SKUs for Windows Phone 8
+        OpenIAB.mapSku(SKU_REPAIR_KIT, OpenIAB_WP8.STORE, "wp8.sku_repair_kit");
+        OpenIAB.mapSku(SKU_PREMIUM_SKIN, OpenIAB_WP8.STORE, "wp8.sku_premium_skin");
+        OpenIAB.mapSku(SKU_GOD_MODE, OpenIAB_WP8.STORE, "wp8.sku_god_mode");
 
         // Set some library options
         var options = new OnePF.Options();
