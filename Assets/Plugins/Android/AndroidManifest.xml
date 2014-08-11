@@ -2,8 +2,8 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unity3d.player"
-	android:installLocation="preferExternal"
-	android:theme="@android:style/Theme.NoTitleBar"
+    android:installLocation="preferExternal"
+    android:theme="@android:style/Theme.NoTitleBar"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -56,6 +56,8 @@
         </intent-filter>
       </receiver>
     </application>
+
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
 
     <uses-permission android:name="com.android.vending.BILLING"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
